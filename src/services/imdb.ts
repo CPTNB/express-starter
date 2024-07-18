@@ -9,7 +9,11 @@ export default new ImdbService({
 
     // TODO, add movie to database
 
-    return res.send(MovieId(id));
+    return res.send({
+      id: MovieId(id),
+      title: req.body.title,
+      rating: req.body.rating,
+    });
   },
   getMovie: (req, res) => {
     if (req.params.movieId === "goodwill-hunting") {

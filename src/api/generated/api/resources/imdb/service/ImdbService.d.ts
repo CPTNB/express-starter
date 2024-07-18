@@ -5,8 +5,8 @@ import * as FernApi from "../../../index";
 import express from "express";
 import * as serializers from "../../../../serialization/index";
 export interface ImdbServiceMethods {
-    createMovie(req: express.Request<never, FernApi.MovieId, FernApi.CreateMovieRequest, never>, res: {
-        send: (responseBody: FernApi.MovieId) => Promise<void>;
+    createMovie(req: express.Request<never, FernApi.Movie, FernApi.CreateMovieRequest, never>, res: {
+        send: (responseBody: FernApi.Movie) => Promise<void>;
         cookie: (cookie: string, value: string, options?: express.CookieOptions) => void;
         locals: any;
     }, next: express.NextFunction): void | Promise<void>;

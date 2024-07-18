@@ -61,7 +61,7 @@ class ImdbService {
                 try {
                     yield this.methods.createMovie(req, {
                         send: (responseBody) => __awaiter(this, void 0, void 0, function* () {
-                            res.json(yield serializers.MovieId.jsonOrThrow(responseBody, {
+                            res.json(yield serializers.Movie.jsonOrThrow(responseBody, {
                                 unrecognizedObjectKeys: "strip",
                             }));
                         }),

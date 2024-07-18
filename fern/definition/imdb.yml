@@ -29,7 +29,7 @@ service:
       method: POST
       path: /create-movie
       request: CreateMovieRequest
-      response: MovieId
+      response: Movie
 
     getMovie:
       method: GET
