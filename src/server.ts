@@ -13,6 +13,9 @@ app.use(cors());
 // register(app, {
 //   imdb,
 // });
+app.get("/", (_: any, res: any) => {
+  res.send("Hello World from the pre-encounter service!");
+});
 
 register(app, { imdb: createIMDBService() });
 

@@ -9,6 +9,6 @@ export declare namespace CreateMovieRequest {
     interface Raw {
         title: string;
         rating: number;
-        externalId: serializers.ExternalId.Raw;
+        patient: serializers.PatientId.Raw;
     }
 }

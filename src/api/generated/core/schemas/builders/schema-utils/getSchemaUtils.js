@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,10 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { SchemaType } from "../../Schema";
-import { JsonError } from "./JsonError";
-import { ParseError } from "./ParseError";
-export function getSchemaUtils(schema) {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.transform = exports.optional = exports.getSchemaUtils = void 0;
+const Schema_1 = require("../../Schema");
+const JsonError_1 = require("./JsonError");
+const ParseError_1 = require("./ParseError");
+function getSchemaUtils(schema) {
     return {
         optional: () => optional(schema),
         transform: (transformer) => transform(schema, transformer),
@@ -19,21 +22,22 @@ export function getSchemaUtils(schema) {
             if (parsed.ok) {
                 return parsed.value;
             }
-            throw new ParseError(parsed.errors);
+            throw new ParseError_1.ParseError(parsed.errors);
         }),
         jsonOrThrow: (parsed, opts) => __awaiter(this, void 0, void 0, function* () {
             const raw = yield schema.json(parsed, opts);
             if (raw.ok) {
                 return raw.value;
             }
-            throw new JsonError(raw.errors);
+            throw new JsonError_1.JsonError(raw.errors);
         }),
     };
 }
+exports.getSchemaUtils = getSchemaUtils;
 /**
  * schema utils are defined in one file to resolve issues with circular imports
  */
-export function optional(schema) {
+function optional(schema) {
     const baseSchema = {
         parse: (raw, opts) => {
             if (raw == null) {
@@ -53,11 +57,12 @@ export function optional(schema) {
             }
             return schema.json(parsed, opts);
         },
-        getType: () => SchemaType.OPTIONAL,
+        getType: () => Schema_1.SchemaType.OPTIONAL,
     };
     return Object.assign(Object.assign({}, baseSchema), getSchemaUtils(baseSchema));
 }
-export function transform(schema, transformer) {
+exports.optional = optional;
+function transform(schema, transformer) {
     const baseSchema = {
         parse: (raw, opts) => __awaiter(this, void 0, void 0, function* () {
             const parsed = yield schema.parse(raw, opts);
@@ -77,3 +82,4 @@ export function transform(schema, transformer) {
     };
     return Object.assign(Object.assign({}, baseSchema), getSchemaUtils(baseSchema));
 }
+exports.transform = transform;

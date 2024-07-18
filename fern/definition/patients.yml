@@ -1,0 +1,4 @@
+types:
+  PatientId:
+    type: string
+    docs: The unique identifier for a Patient

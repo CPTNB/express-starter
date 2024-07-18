@@ -5,5 +5,5 @@ import * as FernApi from "../../../index";
 export interface CreateMovieRequest {
     title: string;
     rating: number;
-    externalId: FernApi.ExternalId;
+    patient: FernApi.PatientId;
 }
