@@ -1,8 +1,9 @@
 {
   "name": "fern-express-starter",
+  "module": "src/server.ts",
   "scripts": {
     "build": "tsc",
-    "start": "node lib/server.js",
+    "start": "bun --watch run src/server.ts",
     "dev": "nodemon src/server.ts",
     "format": "prettier --write src/**",
     "format:check": "prettier --check src/**",
