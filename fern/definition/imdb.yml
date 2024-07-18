@@ -5,6 +5,10 @@ types:
     type: string
     docs: foobar
 
+  ExternalId:
+    type: string
+    docs: foobar
+
   Movie:
     properties:
       id: MovieId
@@ -17,6 +21,7 @@ types:
     properties:
       title: string
       rating: double
+      externalId: ExternalId
 
 service:
   auth: false

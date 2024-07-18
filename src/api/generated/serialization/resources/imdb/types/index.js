@@ -15,5 +15,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./MovieId"), exports);
+__exportStar(require("./ExternalId"), exports);
 __exportStar(require("./Movie"), exports);
 __exportStar(require("./CreateMovieRequest"), exports);
