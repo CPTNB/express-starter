@@ -8,7 +8,7 @@ export default new ImdbService({
     const id = req.body.title.toLowerCase().replaceAll(" ", "-");
 
     // TODO, add movie to database
-
+    console.log(req.body.externalId);
     return res.send({
       id: MovieId(id),
       title: req.body.title,

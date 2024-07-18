@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,20 +7,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.record = void 0;
-const Schema_1 = require("../../Schema");
-const entries_1 = require("../../utils/entries");
-const getErrorMessageForIncorrectType_1 = require("../../utils/getErrorMessageForIncorrectType");
-const isPlainObject_1 = require("../../utils/isPlainObject");
-const maybeSkipValidation_1 = require("../../utils/maybeSkipValidation");
-const schema_utils_1 = require("../schema-utils");
-function record(keySchema, valueSchema) {
+import { SchemaType } from "../../Schema";
+import { entries } from "../../utils/entries";
+import { getErrorMessageForIncorrectType } from "../../utils/getErrorMessageForIncorrectType";
+import { isPlainObject } from "../../utils/isPlainObject";
+import { maybeSkipValidation } from "../../utils/maybeSkipValidation";
+import { getSchemaUtils } from "../schema-utils";
+export function record(keySchema, valueSchema) {
     const baseSchema = {
         parse: (raw, opts) => __awaiter(this, void 0, void 0, function* () {
             return validateAndTransformRecord({
                 value: raw,
-                isKeyNumeric: (yield keySchema.getType()) === Schema_1.SchemaType.NUMBER,
+                isKeyNumeric: (yield keySchema.getType()) === SchemaType.NUMBER,
                 transformKey: (key) => {
                     var _a;
                     return keySchema.parse(key, Object.assign(Object.assign({}, opts), { breadcrumbsPrefix: [...((_a = opts === null || opts === void 0 ? void 0 : opts.breadcrumbsPrefix) !== null && _a !== void 0 ? _a : []), `${key} (key)`] }));
@@ -36,7 +33,7 @@ function record(keySchema, valueSchema) {
         json: (parsed, opts) => __awaiter(this, void 0, void 0, function* () {
             return validateAndTransformRecord({
                 value: parsed,
-                isKeyNumeric: (yield keySchema.getType()) === Schema_1.SchemaType.NUMBER,
+                isKeyNumeric: (yield keySchema.getType()) === SchemaType.NUMBER,
                 transformKey: (key) => {
                     var _a;
                     return keySchema.json(key, Object.assign(Object.assign({}, opts), { breadcrumbsPrefix: [...((_a = opts === null || opts === void 0 ? void 0 : opts.breadcrumbsPrefix) !== null && _a !== void 0 ? _a : []), `${key} (key)`] }));
@@ -48,25 +45,24 @@ function record(keySchema, valueSchema) {
                 breadcrumbsPrefix: opts === null || opts === void 0 ? void 0 : opts.breadcrumbsPrefix,
             });
         }),
-        getType: () => Schema_1.SchemaType.RECORD,
+        getType: () => SchemaType.RECORD,
     };
-    return Object.assign(Object.assign({}, (0, maybeSkipValidation_1.maybeSkipValidation)(baseSchema)), (0, schema_utils_1.getSchemaUtils)(baseSchema));
+    return Object.assign(Object.assign({}, maybeSkipValidation(baseSchema)), getSchemaUtils(baseSchema));
 }
-exports.record = record;
 function validateAndTransformRecord({ value, isKeyNumeric, transformKey, transformValue, breadcrumbsPrefix = [], }) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (!(0, isPlainObject_1.isPlainObject)(value)) {
+        if (!isPlainObject(value)) {
             return {
                 ok: false,
                 errors: [
                     {
                         path: breadcrumbsPrefix,
-                        message: (0, getErrorMessageForIncorrectType_1.getErrorMessageForIncorrectType)(value, "object"),
+                        message: getErrorMessageForIncorrectType(value, "object"),
                     },
                 ],
             };
         }
-        return (0, entries_1.entries)(value).reduce((accPromise, [stringKey, value]) => __awaiter(this, void 0, void 0, function* () {
+        return entries(value).reduce((accPromise, [stringKey, value]) => __awaiter(this, void 0, void 0, function* () {
             // skip nullish keys
             if (value == null) {
                 return accPromise;
