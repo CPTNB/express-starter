@@ -1,7 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
 
 types:
-  MovieId: string
+  MovieId:
+    type: string
+    docs: foobar
 
   Movie:
     properties:
