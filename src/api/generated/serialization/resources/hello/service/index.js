@@ -22,12 +22,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.hello = exports.imdb = void 0;
-exports.imdb = __importStar(require("./imdb"));
-__exportStar(require("./imdb/types"), exports);
-exports.hello = __importStar(require("./hello"));
-__exportStar(require("./imdb/errors"), exports);
+exports.get = void 0;
+exports.get = __importStar(require("./get"));
