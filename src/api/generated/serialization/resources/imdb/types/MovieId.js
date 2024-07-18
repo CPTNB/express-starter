@@ -27,5 +27,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MovieId = void 0;
+const FernApi = __importStar(require("../../../../api/index"));
 const core = __importStar(require("../../../../core"));
-exports.MovieId = core.serialization.string();
+exports.MovieId = core.serialization
+    .string()
+    .transform({
+    transform: FernApi.MovieId,
+    untransform: (value) => value,
+});

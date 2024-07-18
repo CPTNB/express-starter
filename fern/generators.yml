@@ -7,3 +7,5 @@ groups:
         output:
           location: local-file-system
           path: ../src/api/generated
+        config:
+          useBrandedStringAliases: true

@@ -1,6 +1,7 @@
 // this `FernApi` export is generated from your organization name in fern.config.json:
 import { FernApi } from "../api";
 import { ImdbService } from "../api/generated/api/resources/imdb/service/ImdbService";
+import { MovieId } from "../api/generated/api/resources/imdb/types/MovieId";
 
 export default new ImdbService({
   createMovie: (req, res) => {
@@ -8,12 +9,12 @@ export default new ImdbService({
 
     // TODO, add movie to database
 
-    return res.send(id);
+    return res.send(MovieId(id));
   },
   getMovie: (req, res) => {
     if (req.params.movieId === "goodwill-hunting") {
       res.send({
-        id: req.params.movieId,
+        id: MovieId(req.params.movieId),
         title: "Goodwill Hunting",
         rating: 4.9,
       });
